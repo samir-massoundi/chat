@@ -14,7 +14,7 @@ mongoClient.connect(url, function (err, client) {
     } else {
       console.log("connecté à mongodb");
       db = client.db(dbname);
-      let collection = db.collection('historique messages');
+      let collection = db.collection("historique messages");
       app.get("/", (req, res) => {
         // res.send('<h1> Hello </h1>')
         res.sendFile(__dirname + "/index.html");
@@ -22,10 +22,10 @@ mongoClient.connect(url, function (err, client) {
 
       io.on("connection", (socket) => {
         console.log("un utilisateur est connecté");
-        socket.on("chat message", (msg) => {
+        socket.on("chat-message", (msg) => {
           console.log("message: " + msg);
-          io.emit("chat message", msg);
-          collection.insertOne({pseudo : 'Tears',message : msg})
+          io.emit("chat-message", msg);
+          collection.insertOne({ pseudo: "Tears", message: msg });
         });
       });
 
