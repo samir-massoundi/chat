@@ -77,20 +77,20 @@
 
         let form = document.getElementById("form");
         let input = document.getElementById("input");
-        let user = document.getElementById("user");
+        let user = document.getElementById("pseudo");
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             if (input.value) {
-                socket.emit("chat-message", input.value);
-                console.log(input.value);
+                socket.emit("chat-message", {message :input.value, pseudo : user.value});
+                console.log(pseudo + "a ecrit" + message);
                 input.value = "";
             }
         });
 
         socket.on("chat-message", function (msg) {
             let item = document.createElement("li");
-            item.textContent = msg;
+            item.textContent =msg.pseudo + " a ecrit : " + msg.message;
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });

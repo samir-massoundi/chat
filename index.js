@@ -23,9 +23,9 @@ mongoClient.connect(url, function (err, client) {
       io.on("connection", (socket) => {
         console.log("un utilisateur est connecté");
         socket.on("chat-message", (msg) => {
-          console.log("message: " + msg);
+          console.log("message de "+ msg.pseudo + " : " + msg.message);
           io.emit("chat-message", msg);
-          collection.insertOne({ pseudo: "Tears", message: msg });
+        //   collection.insertOne({ msg.message , msg.pseudo });
         });
       });
 
